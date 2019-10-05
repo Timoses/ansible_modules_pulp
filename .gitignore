@@ -2,3 +2,4 @@ __pycache__/
 *.pyc
 *.pyo
 /tests/playbooks/vars/server.yaml
+/.be/id-cache
