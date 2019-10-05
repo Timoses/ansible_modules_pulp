@@ -1,0 +1,50 @@
+{
+
+
+
+
+
+
+    "creator": "Matthias Dellweg <2500@gmx.de>", 
+
+
+
+
+
+
+    "reporter": "Matthias Dellweg <2500@gmx.de>", 
+
+
+
+
+
+
+    "severity": "minor", 
+
+
+
+
+
+
+    "status": "open", 
+
+
+
+
+
+
+    "summary": "Stop modifying module.params", 
+
+
+
+
+
+
+    "time": "Sat, 05 Oct 2019 15:01:14 +0000"
+
+
+
+
+
+
+}
