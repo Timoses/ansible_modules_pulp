@@ -1,0 +1,7 @@
+Implement modules, to allow the standard sync publish workflow for file repositories.
+This involves handling
+* Repositories
+* FileRemotes
+* Synching FileRemotes
+* FilePublications
+* FileDistributions
