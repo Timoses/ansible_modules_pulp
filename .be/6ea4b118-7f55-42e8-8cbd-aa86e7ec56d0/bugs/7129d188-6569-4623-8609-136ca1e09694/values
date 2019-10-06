@@ -19,7 +19,7 @@
 
 
 
-        "BLOCKS:7ed62859-311a-4af7-b374-339c4d226ff7"
+        "BLOCKED-BY:902a90dd-e65a-4da5-940c-60c424b415ef"
 
 
 
@@ -40,7 +40,7 @@
 
 
 
-    "severity": "wishlist", 
+    "severity": "target", 
 
 
 
@@ -54,14 +54,14 @@
 
 
 
-    "summary": "Create file_publication modules", 
+    "summary": "Ansible collection support", 
 
 
 
 
 
 
-    "time": "Sun, 06 Oct 2019 09:17:37 +0000"
+    "time": "Sun, 06 Oct 2019 11:17:32 +0000"
 
 
 
