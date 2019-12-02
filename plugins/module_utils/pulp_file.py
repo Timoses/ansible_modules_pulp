@@ -37,7 +37,7 @@ class PulpFileApiClient(PulpCoreApiClient):
         if not self._plugin_client:
             if not HAS_PULP_FILE_CLIENT:
                 self.fail_json(
-                    msg=missing_required_lib("pulp_file-client"),
+                    msg=missing_required_lib("pulp-file-client"),
                     exception=PULP_FILE_CLIENT_IMPORT_ERROR,
                 )
             self._plugin_client = pulp_file.ApiClient(self._api_config)
