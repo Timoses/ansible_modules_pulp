@@ -185,7 +185,7 @@ class PulpEntity(object):
             self.module.fail_json(msg="This entity is not creatable.")
         kwargs = dict()
         kwargs.update(self.id)
-        kwargs.update(self.desired_state)
+        kwargs.update(self.desired_attributes)
         entity = self._api_entity_class(**kwargs)
         if not self.module.check_mode:
             response = self.api.create(entity)
@@ -201,7 +201,7 @@ class PulpEntity(object):
     def update(self):
         changed = False
 
-        desired_attributes = self.desired_state
+        desired_attributes = self.desired_attributes
         # drop 'file' because artifacts as well as content units are immutable anyway
         desired_attributes.pop('file', None)
         for key, value in desired_attributes.items():
@@ -276,18 +276,16 @@ class PulpFileRemote(PulpFileEntity):
     _name_singular = 'remote'
     _name_plural = 'remotes'
 
-    def __init__(self, module):
+    def __init__(self, module, **kwargs):
         super(PulpFileEntity, self).__init__(
             module=module
         )
 
         self.id = {
-            'name': module.params['name'],
+            'name': kwargs.pop('name', None),
         }
 
-        self.desired_state = {
-            key: self.module.params[key] for key in ['url', 'download_concurrency', 'policy'] if self.module.params[key] is not None
-        }
+        self.desired_attributes = kwargs.pop('desired_attributes', None)
 
 
 class PulpFileRepository(PulpFileEntity):
@@ -298,20 +296,17 @@ class PulpFileRepository(PulpFileEntity):
     _name_singular = 'repository'
     _name_plural = 'repositories'
 
-    def __init__(self, module):
+    def __init__(self, module, **kwargs):
         super(PulpFileEntity, self).__init__(
             module=module
         )
 
         self.id = {
-            'name': module.params['name'],
+            'name': kwargs.pop('name', None),
         }
 
-        self.desired_state = {}
-        if self.module.params['description'] is not None:
-            # In case of an empty string we try to nullify the description
-            # Which does not yet work
-            self.desired_state['description'] = module.params['description'] or None
+        self.desired_attributes = kwargs.pop('desired_attributes', None)
+
 
 
 #class PulpEntityController:

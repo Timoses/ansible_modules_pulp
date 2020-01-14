@@ -125,7 +125,11 @@ def main():
         ]
     )
 
-    remote = PulpFileRemote(module)
+    desired_attributes = {
+        key: module.params[key] for key in ['url', 'download_concurrency', 'policy', 'proxy_url', 'tls_validation'] if module.params[key] is not None
+    }
+
+    remote = PulpFileRemote(module, name=module.params['name'], desired_attributes=desired_attributes)
     module.process_entity(remote)
 
 

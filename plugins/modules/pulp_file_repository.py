@@ -98,7 +98,13 @@ def main():
         ]
     )
 
-    repo = PulpFileRepository(module)
+    desired_attributes = {}
+    if module.params['description'] is not None:
+        # In case of an empty string we try to nullify the description
+        # Which does not yet work
+        desired_attributes['description'] = module.params['description'] or None
+
+    repo = PulpFileRepository(module, name=module.params['name'], desired_attributes=desired_attributes)
     module.process_entity(repo)
 
 
