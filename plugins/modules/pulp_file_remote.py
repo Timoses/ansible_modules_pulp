@@ -103,6 +103,7 @@ RETURN = r'''
 
 from ansible.module_utils.pulp_helper import (
     PulpEntityAnsibleModule,
+    PulpFileRemote
 )
 
 
@@ -121,20 +122,11 @@ def main():
         required_if=[
             ('state', 'present', ['name']),
             ('state', 'absent', ['name']),
-        ],
-        entity_name='remote',
-        entity_plural='remotes',
-        entity_plugin='file'
+        ]
     )
 
-    natural_key = {
-        'name': module.params['name'],
-    }
-    desired_attributes = {
-        key: module.params[key] for key in ['url', 'download_concurrency', 'policy', 'proxy_url', 'tls_validation'] if module.params[key] is not None
-    }
-
-    module.process_entity(natural_key, desired_attributes)
+    remote = PulpFileRemote(module)
+    module.process_entity(remote)
 
 
 if __name__ == '__main__':

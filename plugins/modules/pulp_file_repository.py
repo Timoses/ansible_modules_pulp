@@ -82,6 +82,7 @@ RETURN = r'''
 
 from ansible.module_utils.pulp_helper import (
     PulpEntityAnsibleModule,
+    PulpFileRepository
 )
 
 
@@ -94,22 +95,11 @@ def main():
         required_if=[
             ('state', 'present', ['name']),
             ('state', 'absent', ['name']),
-        ],
-        entity_name='repository',
-        entity_plural='repositories',
-        entity_plugin='file'
+        ]
     )
 
-    natural_key = {
-        'name': module.params['name'],
-    }
-    desired_attributes = {}
-    if module.params['description'] is not None:
-        # In case of an empty string we try to nullify the description
-        # Which does not yet work
-        desired_attributes['description'] = module.params['description'] or None
-
-    module.process_entity(natural_key, desired_attributes)
+    repo = PulpFileRepository(module)
+    module.process_entity(repo)
 
 
 if __name__ == '__main__':
